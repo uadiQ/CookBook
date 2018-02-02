@@ -40,15 +40,21 @@ class MainScreenViewController: UIViewController {
         self.present(errorAlert, animated: true, completion: nil)
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+   private func getMeal(at indexPath: IndexPath) -> Meal? {
+        return DataManager.instance.meals[indexPath.row]
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "showMealDetails", let destVC = segue.destination as? MealDetailsViewController else { return }
+        
+        guard let cell = sender as? MealTableViewCell, let indexPath = tableView.indexPath(for: cell) else { return }
+        
+        guard let item = getMeal(at: indexPath) else { fatalError("Meal @ wrong indexPath") }
+        
+        destVC.meal = item
+    }
     
 }
 
@@ -65,12 +71,13 @@ extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "mealTableViewCell", for: indexPath) as? MealTableViewCell else { fatalError("Cell with wrong ID") }
-        guard let mealToPresent = DataManager.instance.getMeal(at: indexPath) else { fatalError("Meal @ wrong indexPath") }
-
+        guard let mealToPresent = getMeal(at: indexPath) else { fatalError("Meal @ wrong indexPath") }
+        
         let imageToSet = mealToPresent.image ?? #imageLiteral(resourceName: "placeholder")
         cell.update(title: mealToPresent.title, ingredients: mealToPresent.ingredients, image: imageToSet)
         return cell
     }
+
 }
 
 // MARK: - UISearchBar Delegate

@@ -17,6 +17,7 @@
 		1C9C4001202109A700B48451 /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9C4000202109A700B48451 /* MainScreenViewController.swift */; };
 		1C9C400420210F2E00B48451 /* Notification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9C400320210F2E00B48451 /* Notification+Extension.swift */; };
 		1C9C40082021210800B48451 /* MealTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9C40072021210800B48451 /* MealTableViewCell.swift */; };
+		1C9C400A2023BAC100B48451 /* MealDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9C40092023BAC100B48451 /* MealDetailsViewController.swift */; };
 		783FE08C7CE6546F2A2CA184 /* Pods_CookBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88E35A9A2967EE3FDC50EB89 /* Pods_CookBook.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		1C9C4000202109A700B48451 /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		1C9C400320210F2E00B48451 /* Notification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extension.swift"; sourceTree = "<group>"; };
 		1C9C40072021210800B48451 /* MealTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTableViewCell.swift; sourceTree = "<group>"; };
+		1C9C40092023BAC100B48451 /* MealDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailsViewController.swift; sourceTree = "<group>"; };
 		88E35A9A2967EE3FDC50EB89 /* Pods_CookBook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CookBook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE1E81F69EAAEA5D62B8C939 /* Pods-CookBook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookBook.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CookBook/Pods-CookBook.debug.xcconfig"; sourceTree = "<group>"; };
 		DEC138A5107BFC906F2B13B1 /* Pods-CookBook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookBook.release.xcconfig"; path = "Pods/Target Support Files/Pods-CookBook/Pods-CookBook.release.xcconfig"; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				1C9C4000202109A700B48451 /* MainScreenViewController.swift */,
+				1C9C40092023BAC100B48451 /* MealDetailsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				1C9C400420210F2E00B48451 /* Notification+Extension.swift in Sources */,
 				1C9C3FFB2021070100B48451 /* Meal.swift in Sources */,
 				1C9C3FF92021069400B48451 /* DataManager.swift in Sources */,
+				1C9C400A2023BAC100B48451 /* MealDetailsViewController.swift in Sources */,
 				1C9C3FFF202107AB00B48451 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

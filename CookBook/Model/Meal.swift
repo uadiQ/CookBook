@@ -14,6 +14,7 @@ class Meal {
     let title: String
     let ingredients: String
     let thumbnailUrl: URL?
+    let receiptURL: URL?
     
     var image: UIImage?
     
@@ -22,9 +23,11 @@ class Meal {
         self.title = title
         self.ingredients = json["ingredients"].stringValue
         self.thumbnailUrl = json["thumbnail"].url
+        self.receiptURL = json["href"].url
         if let urlToDownload = self.thumbnailUrl {
             guard let dataImage = try? Data(contentsOf: urlToDownload) else { return }
             self.image = UIImage(data: dataImage)
         }
+        
     }
 }

@@ -69,8 +69,4 @@ final class DataManager {
             }
         }
     }
-    
-    func getMeal(at indexPath: IndexPath) -> Meal? {
-        return meals[indexPath.row]
-    }
 }

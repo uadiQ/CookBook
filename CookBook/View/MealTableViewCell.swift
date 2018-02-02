@@ -17,7 +17,7 @@ class MealTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        ibImageView.layer.cornerRadius = ibImageView.frame.width / 2.5
+        ibImageView.layer.cornerRadius = ibImageView.frame.width / 2.0
     }
     
     func update(title: String, ingredients: String, image: UIImage) {
