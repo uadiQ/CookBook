@@ -20,8 +20,12 @@ class MealTableViewCell: UITableViewCell {
         ibImageView.layer.cornerRadius = ibImageView.frame.width / 2.0
     }
     
-    func update(title: String, ingredients: String, image: UIImage) {
-        ibImageView.image = image
+    func update(title: String, ingredients: String, imageURL: URL?) {
+        if let url = imageURL {
+        ibImageView.af_setImage(withURL: url, placeholderImage: #imageLiteral(resourceName: "placeholder"))
+        } else {
+            ibImageView.image = #imageLiteral(resourceName: "placeholder")
+        }
         ibTitleLabel.text = title
         ibIngredientsLabel.text = ingredients
     }

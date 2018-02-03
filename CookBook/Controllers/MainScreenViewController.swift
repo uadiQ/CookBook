@@ -13,6 +13,8 @@ class MainScreenViewController: UIViewController {
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var tableView: UITableView!
     
+    var isSearchEnabled: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -22,6 +24,7 @@ class MainScreenViewController: UIViewController {
         tableView.keyboardDismissMode = .onDrag
         HUD.show(.progress, onView: view)
         DataManager.instance.loadDefaultReceiptFromNet()
+        isSearchEnabled = true
     }
     
     private func addObservers() {
@@ -40,7 +43,7 @@ class MainScreenViewController: UIViewController {
         self.present(errorAlert, animated: true, completion: nil)
     }
     
-   private func getMeal(at indexPath: IndexPath) -> Meal? {
+    private func getMeal(at indexPath: IndexPath) -> Meal? {
         return DataManager.instance.meals[indexPath.row]
     }
     
@@ -73,11 +76,19 @@ extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "mealTableViewCell", for: indexPath) as? MealTableViewCell else { fatalError("Cell with wrong ID") }
         guard let mealToPresent = getMeal(at: indexPath) else { fatalError("Meal @ wrong indexPath") }
         
-        let imageToSet = mealToPresent.image ?? #imageLiteral(resourceName: "placeholder")
-        cell.update(title: mealToPresent.title, ingredients: mealToPresent.ingredients, image: imageToSet)
+        cell.update(title: mealToPresent.title, ingredients: mealToPresent.ingredients, imageURL: mealToPresent.thumbnailUrl)
         return cell
     }
-
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if isSearchEnabled == false {
+            guard editingStyle == .delete else { return }
+            let item = DataManager.instance.favoriteMeals[indexPath.row]
+            DataManager.instance.deleteMealFromFavorites(item)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
 }
 
 // MARK: - UISearchBar Delegate

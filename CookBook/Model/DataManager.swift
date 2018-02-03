@@ -16,6 +16,7 @@ final class DataManager {
     private init() { }
     
     var meals: [Meal] = []
+    var favoriteMeals: [Meal] = []
     
     func loadDefaultReceiptFromNet() {
         Alamofire.request(Utils.basicUrl + "pasta").responseJSON { response in
@@ -32,13 +33,13 @@ final class DataManager {
                     return
                 }
                 for item in mealsJSONArray {
-                    guard let meal = Meal(json: item) else { print("Error @ creating meal from json"); continue }
+                    guard let meal = Meal(json: item) else { debugPrint("Error @ creating meal from json"); continue }
                     self.meals.append(meal)
                 }
                 NotificationCenter.default.post(name: .MealsLoaded, object: nil)
                 
             case .failure(let error):
-                print("Loading from net failed: \(error)")
+                debugPrint(error)
             }
         }
     }
@@ -49,7 +50,7 @@ final class DataManager {
             case .success(let value):
                 let jsonResponse = JSON(value)
                 guard let mealsJSONArray = jsonResponse["results"].array else {
-                    print("Response didn't turn into array")
+                    debugPrint("Response didn't turn into array")
                     return
                 }
                 
@@ -59,7 +60,7 @@ final class DataManager {
                 }
                 self.meals.removeAll()
                 for item in mealsJSONArray {
-                    guard let meal = Meal(json: item) else { print("Error @ creating meal from json"); continue }
+                    guard let meal = Meal(json: item) else { debugPrint("Error @ creating meal from json"); continue }
                     self.meals.append(meal)
                 }
                 NotificationCenter.default.post(name: .MealsLoaded, object: nil)
@@ -69,4 +70,16 @@ final class DataManager {
             }
         }
     }
+    
+    func addToFavorites(meal: Meal) {
+        guard !favoriteMeals.contains(meal) else { return }
+        favoriteMeals.append(meal)
+    }
+    
+    func deleteMealFromFavorites(_ meal: Meal) {
+        guard let deletingIndex = favoriteMeals.index(of: meal) else { debugPrint("Can't delete nonexisting meal"); return }
+        favoriteMeals.remove(at: deletingIndex)
+        NotificationCenter.default.post(name: .MealDeletedFromFavorites, object: nil)
+    }
+    
 }

@@ -11,4 +11,5 @@ import Foundation
 extension Notification.Name {
     static let MealsLoaded = Notification.Name("MealsLoaded")
     static let EmptySearchResult = Notification.Name("EmptySearchResult")
+    static let MealDeletedFromFavorites = Notification.Name("MealDeletedFromFavorites")
 }
