@@ -67,7 +67,9 @@ extension BrowseScreenViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MealViewCell.reuseID, for: indexPath) as? MealViewCell else { fatalError("Cell with wrong ID") }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MealViewCell.reuseID, for: indexPath) as? MealViewCell else {
+            fatalError("Cell with wrong ID")
+        }
         
         guard let mealToPresent = getMeal(at: indexPath) else { fatalError("Meal @ wrong indexPath") }
         

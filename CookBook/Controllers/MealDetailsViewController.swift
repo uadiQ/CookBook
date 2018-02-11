@@ -27,7 +27,6 @@ class MealDetailsViewController: UIViewController {
     
     private func setupUI() {
         title = meal.title
-        //ibImageView.image = meal.image ?? #imageLiteral(resourceName: "placeholder")
         ibTitleText.text = meal.title
         ibReceiptText.text = meal.ingredients
         if let url = meal.thumbnailUrl {
@@ -49,6 +48,6 @@ class MealDetailsViewController: UIViewController {
     
     @IBAction func addToFavoritesPushed(_ sender: Any) {
         DataManager.instance.addToFavorites(meal: meal)
-        HUD.flash(.labeledSuccess(title: "Meal added to Favorites!", subtitle: nil), delay: 1)
+        HUD.flash(.labeledSuccess(title: "Meal added to Favorites!", subtitle: nil), delay: 0.5)
     }
 }

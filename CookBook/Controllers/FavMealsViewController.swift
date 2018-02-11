@@ -17,12 +17,13 @@ class FavMealsViewController: UIViewController {
         tableView.register(MealViewCell.nib, forCellReuseIdentifier: MealViewCell.reuseID)
         tableView.delegate = self
         tableView.dataSource = self
+        searchBar.delegate = self
         addObservers()
     }
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(favMemesArrayChanged), name: .MealAddedToFavorites, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(favMemesArrayChanged), name: .MealDeletedFromFavorites, object: nil)
+      //  NotificationCenter.default.addObserver(self, selector: #selector(favMemesArrayChanged), name: .MealDeletedFromFavorites, object: nil)
     }
     
     private func hideKeyboard() {
@@ -48,6 +49,8 @@ class FavMealsViewController: UIViewController {
     
 }
 
+// MARK: - TableView
+
 extension FavMealsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -59,7 +62,10 @@ extension FavMealsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MealViewCell.reuseID, for: indexPath) as? MealViewCell else { fatalError("Cell with wrong ID") }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MealViewCell.reuseID, for: indexPath) as? MealViewCell else {
+            fatalError("Cell with wrong ID")
+        }
+        
         guard let mealToPresent = getMeal(at: indexPath) else { fatalError("Meal @ wrong indexPath") }
         cell.update(title: mealToPresent.title, ingredients: mealToPresent.ingredients, imageURL: mealToPresent.thumbnailUrl)
         return cell
@@ -76,6 +82,15 @@ extension FavMealsViewController: UITableViewDelegate, UITableViewDataSource {
         let item = DataManager.instance.favoriteMeals[indexPath.row]
         DataManager.instance.deleteMealFromFavorites(item)
         tableView.deleteRows(at: [indexPath], with: .fade)
+    }
+}
+
+// MARK: - SeachBar
+
+extension FavMealsViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    
     }
 }
 
