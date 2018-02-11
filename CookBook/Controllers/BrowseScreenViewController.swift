@@ -1,30 +1,28 @@
 //
-//  MainScreenViewController.swift
+//  BrowseScreenViewController.swift
 //  CookBook
 //
-//  Created by Vadim Shoshin on 30.01.2018.
+//  Created by Vadim Shoshin on 11.02.2018.
 //  Copyright © 2018 Vadim Shoshin. All rights reserved.
 //
 
 import UIKit
 import PKHUD
 
-class MainScreenViewController: UIViewController {
+class BrowseScreenViewController: UIViewController {
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var tableView: UITableView!
     
-    var isSearchEnabled: Bool = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.register(MealViewCell.nib, forCellReuseIdentifier: MealViewCell.reuseID)
         tableView.delegate = self
         tableView.dataSource = self
-        addObservers()
         searchBar.delegate = self
         tableView.keyboardDismissMode = .onDrag
+        addObservers()
         HUD.show(.progress, onView: view)
         DataManager.instance.loadDefaultReceiptFromNet()
-        isSearchEnabled = true
     }
     
     private func addObservers() {
@@ -50,20 +48,16 @@ class MainScreenViewController: UIViewController {
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "showMealDetails", let destVC = segue.destination as? MealDetailsViewController else { return }
-        
-        guard let cell = sender as? MealTableViewCell, let indexPath = tableView.indexPath(for: cell) else { return }
-        
-        guard let item = getMeal(at: indexPath) else { fatalError("Meal @ wrong indexPath") }
-        
-        destVC.meal = item
+        guard let destVC = segue.destination as? MealDetailsViewController else { return }
+        destVC.meal = sender as? Meal
+        destVC.isFromFavoritesScreen = false
     }
     
 }
 
 // MARK: - TableView Delegate & DataSource
 
-extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
+extension BrowseScreenViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return DataManager.instance.meals.count
     }
@@ -73,27 +67,23 @@ extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "mealTableViewCell", for: indexPath) as? MealTableViewCell else { fatalError("Cell with wrong ID") }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MealViewCell.reuseID, for: indexPath) as? MealViewCell else { fatalError("Cell with wrong ID") }
+        
         guard let mealToPresent = getMeal(at: indexPath) else { fatalError("Meal @ wrong indexPath") }
         
         cell.update(title: mealToPresent.title, ingredients: mealToPresent.ingredients, imageURL: mealToPresent.thumbnailUrl)
         return cell
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if isSearchEnabled == false {
-            guard editingStyle == .delete else { return }
-            let item = DataManager.instance.favoriteMeals[indexPath.row]
-            DataManager.instance.deleteMealFromFavorites(item)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let meal = getMeal(at: indexPath) else { return }
+        performSegue(withIdentifier: "showMealDetails", sender: meal)
     }
-    
 }
 
 // MARK: - UISearchBar Delegate
 
-extension MainScreenViewController: UISearchBarDelegate {
+extension BrowseScreenViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         HUD.show(.progress, onView: view)
@@ -108,7 +98,7 @@ extension MainScreenViewController: UISearchBarDelegate {
 
 // MARK: - Notifications Extension
 
-extension MainScreenViewController {
+extension BrowseScreenViewController {
     @objc func mealsLoaded() {
         HUD.hide()
         tableView.reloadData()

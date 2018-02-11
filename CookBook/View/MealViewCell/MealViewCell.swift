@@ -1,15 +1,18 @@
 //
-//  MealTableViewCell.swift
+//  MealViewCell.swift
 //  CookBook
 //
-//  Created by Vadim Shoshin on 30.01.2018.
+//  Created by Vadim Shoshin on 11.02.2018.
 //  Copyright © 2018 Vadim Shoshin. All rights reserved.
 //
 
 import UIKit
-import AlamofireImage
 
-class MealTableViewCell: UITableViewCell {
+class MealViewCell: UITableViewCell {
+
+    static let reuseID = String(describing: MealViewCell.self)
+    static let nib = UINib(nibName: String(describing: MealViewCell.self), bundle: nil)
+    
     @IBOutlet private weak var ibImageView: UIImageView!
     @IBOutlet private weak var ibTitleLabel: UILabel!
     @IBOutlet private weak var ibIngredientsLabel: UILabel!
@@ -22,12 +25,12 @@ class MealTableViewCell: UITableViewCell {
     
     func update(title: String, ingredients: String, imageURL: URL?) {
         if let url = imageURL {
-        ibImageView.af_setImage(withURL: url, placeholderImage: #imageLiteral(resourceName: "placeholder"))
+            ibImageView.af_setImage(withURL: url, placeholderImage: #imageLiteral(resourceName: "placeholder"))
         } else {
             ibImageView.image = #imageLiteral(resourceName: "placeholder")
         }
         ibTitleLabel.text = title
         ibIngredientsLabel.text = ingredients
     }
-    
+
 }

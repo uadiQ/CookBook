@@ -12,10 +12,12 @@ import SafariServices
 import PKHUD
 
 class MealDetailsViewController: UIViewController {
+    @IBOutlet private weak var addToFavoritesButton: UIBarButtonItem!
     @IBOutlet private weak var ibImageView: UIImageView!
     @IBOutlet private weak var ibTitleText: UILabel!
     @IBOutlet private weak var ibReceiptText: UITextView!
     
+    var isFromFavoritesScreen: Bool!
     var meal: Meal!
     
     override func viewDidLoad() {
@@ -33,6 +35,7 @@ class MealDetailsViewController: UIViewController {
         } else {
             ibImageView.image = #imageLiteral(resourceName: "placeholder")
         }
+        addToFavoritesButton.isEnabled = !isFromFavoritesScreen
     }
     
     @IBAction func showReceiptPushed(_ sender: Any) {

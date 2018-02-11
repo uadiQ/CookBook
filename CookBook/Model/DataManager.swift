@@ -74,6 +74,7 @@ final class DataManager {
     func addToFavorites(meal: Meal) {
         guard !favoriteMeals.contains(meal) else { return }
         favoriteMeals.append(meal)
+        NotificationCenter.default.post(name: .MealAddedToFavorites, object: nil)
     }
     
     func deleteMealFromFavorites(_ meal: Meal) {
