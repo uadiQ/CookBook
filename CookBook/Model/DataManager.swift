@@ -80,7 +80,6 @@ final class DataManager {
     func deleteMealFromFavorites(_ meal: Meal) {
         guard let deletingIndex = favoriteMeals.index(of: meal) else { debugPrint("Can't delete nonexisting meal"); return }
         favoriteMeals.remove(at: deletingIndex)
-        NotificationCenter.default.post(name: .MealDeletedFromFavorites, object: nil)
     }
     
 }

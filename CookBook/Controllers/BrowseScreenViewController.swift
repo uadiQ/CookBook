@@ -21,6 +21,7 @@ class BrowseScreenViewController: UIViewController {
         searchBar.delegate = self
         tableView.keyboardDismissMode = .onDrag
         addObservers()
+        setupGestures()
         HUD.show(.progress, onView: view)
         DataManager.instance.loadDefaultReceiptFromNet()
     }
@@ -28,6 +29,19 @@ class BrowseScreenViewController: UIViewController {
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(mealsLoaded), name: .MealsLoaded, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(emptySearchResult), name: .EmptySearchResult, object: nil)
+    }
+    
+    private func setupGestures() {
+        let upSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeGestureRecognized(_:)))
+        upSwipeGesture.direction = .up
+        let downSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeGestureRecognized(_:)))
+        downSwipeGesture.direction = .down
+        tableView.addGestureRecognizer(upSwipeGesture)
+        tableView.addGestureRecognizer(downSwipeGesture)
+    }
+    
+    @objc private func swipeGestureRecognized(_ sender: UISwipeGestureRecognizer) {
+        hideKeyboard()
     }
     
     private func hideKeyboard() {
