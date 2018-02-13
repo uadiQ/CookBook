@@ -15,30 +15,17 @@ class FavMealsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addObservers()
-        setupGestures()
         tableView.register(MealViewCell.nib, forCellReuseIdentifier: MealViewCell.reuseID)
         tableView.delegate = self
         tableView.dataSource = self
         searchBar.delegate = self
+        tableView.keyboardDismissMode = .onDrag
     }
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(favMemesArrayChanged), name: .MealAddedToFavorites, object: nil)
     }
-    
-    private func setupGestures() {
-        let upSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeGestureRecognized(_:)))
-        upSwipeGesture.direction = .up
-        let downSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeGestureRecognized(_:)))
-        downSwipeGesture.direction = .down
-        tableView.addGestureRecognizer(upSwipeGesture)
-        tableView.addGestureRecognizer(downSwipeGesture)
-    }
-    
-    @objc private func swipeGestureRecognized(_ sender: UISwipeGestureRecognizer) {
-        hideKeyboard()
-    }
-    
+
     private func hideKeyboard() {
         view.endEditing(true)
     }
