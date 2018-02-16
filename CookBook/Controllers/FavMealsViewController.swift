@@ -9,8 +9,12 @@
 import UIKit
 
 class FavMealsViewController: UIViewController {
+    
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var tableView: UITableView!
+    
+    private var isSearchEnabled: Bool = false
+    private var searchResultArray: [Meal] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,11 +29,11 @@ class FavMealsViewController: UIViewController {
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(favMemesArrayChanged), name: .MealAddedToFavorites, object: nil)
     }
-
+    
     private func hideKeyboard() {
         view.endEditing(true)
     }
-
+    
     private func showErrorAlertWithOk(title: String, message: String) {
         let errorAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -38,7 +42,16 @@ class FavMealsViewController: UIViewController {
     }
     
     private func getMeal(at indexPath: IndexPath) -> Meal? {
-        return DataManager.instance.favoriteMeals[indexPath.row]
+        return isSearchEnabled ? searchResultArray[indexPath.row] : DataManager.instance.favoriteMeals[indexPath.row]
+    }
+    
+    private func findMeals(for mealName: String) {
+        isSearchEnabled = !mealName.isEmpty
+        searchResultArray.removeAll()
+        for meal in DataManager.instance.favoriteMeals where meal.title.lowercased().contains(mealName.lowercased()) {
+            searchResultArray.append(meal)
+        }
+        tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -58,7 +71,7 @@ extension FavMealsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DataManager.instance.favoriteMeals.count
+        return isSearchEnabled ? searchResultArray.count : DataManager.instance.favoriteMeals.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -79,7 +92,7 @@ extension FavMealsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         guard editingStyle == .delete else { return }
-        let item = DataManager.instance.favoriteMeals[indexPath.row]
+        guard let item = getMeal(at: indexPath) else { fatalError("Error @ getting meals for table") }
         DataManager.instance.deleteMealFromFavorites(item)
         tableView.deleteRows(at: [indexPath], with: .fade)
     }
@@ -91,6 +104,10 @@ extension FavMealsViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         hideKeyboard()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        findMeals(for: searchText)
     }
 }
 
