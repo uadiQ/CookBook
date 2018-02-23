@@ -26,6 +26,19 @@ class FavMealsViewController: UIViewController {
         tableView.keyboardDismissMode = .onDrag
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destVC = segue.destination as? MealDetailsViewController else { return }
+        destVC.meal = sender as? Meal
+        destVC.isFromFavoritesScreen = true
+    }
+    
+    // MARK: - Private methods
+    
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(favMemesArrayChanged), name: .MealAddedToFavorites, object: nil)
     }
@@ -54,12 +67,6 @@ class FavMealsViewController: UIViewController {
         tableView.reloadData()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let destVC = segue.destination as? MealDetailsViewController else { return }
-        destVC.meal = sender as? Meal
-        destVC.isFromFavoritesScreen = true
-    }
-    
 }
 
 // MARK: - TableView
@@ -67,7 +74,7 @@ class FavMealsViewController: UIViewController {
 extension FavMealsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return MealViewCell.height
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

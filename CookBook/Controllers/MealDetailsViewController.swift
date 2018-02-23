@@ -17,7 +17,7 @@ class MealDetailsViewController: UIViewController {
     @IBOutlet private weak var ibTitleText: UILabel!
     @IBOutlet private weak var ibReceiptText: UITextView!
     
-    var isFromFavoritesScreen: Bool!
+    var isFromFavoritesScreen = false
     var meal: Meal!
     
     override func viewDidLoad() {
@@ -35,6 +35,8 @@ class MealDetailsViewController: UIViewController {
             ibImageView.image = #imageLiteral(resourceName: "placeholder")
         }
         addToFavoritesButton.isEnabled = !isFromFavoritesScreen
+        ibReceiptText.isEditable = false
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     @IBAction func showReceiptPushed(_ sender: Any) {

@@ -15,11 +15,11 @@ final class DataManager {
     static let instance = DataManager()
     private init() { }
     
-    var meals: [Meal] = []
-    var favoriteMeals: [Meal] = []
+    private(set) var meals: [Meal] = []
+    private(set) var favoriteMeals: [Meal] = []
     
     func loadDefaultReceiptFromNet() {
-        Alamofire.request(Utils.basicUrl + "pasta").responseJSON { response in
+        Alamofire.request(Endpoint.basicUrl + "pasta").responseJSON { response in
             switch response.result {
             case .success(let value):
                 let jsonResponse = JSON(value)
@@ -45,7 +45,7 @@ final class DataManager {
     }
     
     func searchReceipts(for meal: String) {
-        Alamofire.request(Utils.basicUrl + meal).responseJSON { response in
+        Alamofire.request(Endpoint.basicUrl + meal).responseJSON { response in
             switch response.result {
             case .success(let value):
                 let jsonResponse = JSON(value)
@@ -55,6 +55,7 @@ final class DataManager {
                 }
                 
                 if mealsJSONArray.isEmpty {
+                    self.meals = []
                     NotificationCenter.default.post(name: .EmptySearchResult, object: nil)
                     return
                 }

@@ -13,6 +13,8 @@ class MealViewCell: UITableViewCell {
     static let reuseID = String(describing: MealViewCell.self)
     static let nib = UINib(nibName: String(describing: MealViewCell.self), bundle: nil)
     
+    static let height: CGFloat = 100
+    
     @IBOutlet private weak var ibImageView: UIImageView!
     @IBOutlet private weak var ibTitleLabel: UILabel!
     @IBOutlet private weak var ibIngredientsLabel: UILabel!

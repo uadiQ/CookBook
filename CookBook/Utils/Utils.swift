@@ -9,6 +9,6 @@
 import Foundation
 
 struct Utils {
-    static let defaultUrl: String = "http://www.recipepuppy.com/api/?i=onions,garlic&q=omelet&p=3"
-    static let basicUrl: String = "http://www.recipepuppy.com/api/?q="
+//    static let defaultUrl: String = "http://www.recipepuppy.com/api/?i=onions,garlic&q=omelet&p=3"
+//    static let basicUrl: String = "http://www.recipepuppy.com/api/?q="
 }

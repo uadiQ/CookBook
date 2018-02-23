@@ -25,6 +25,11 @@ class BrowseScreenViewController: UIViewController {
         DataManager.instance.loadDefaultReceiptFromNet()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(mealsLoaded), name: .MealsLoaded, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(emptySearchResult), name: .EmptySearchResult, object: nil)
@@ -42,6 +47,7 @@ class BrowseScreenViewController: UIViewController {
     }
     
     private func getMeal(at indexPath: IndexPath) -> Meal? {
+        guard !DataManager.instance.meals.isEmpty else { return nil }
         return DataManager.instance.meals[indexPath.row]
     }
     
@@ -63,7 +69,7 @@ extension BrowseScreenViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return MealViewCell.height
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -108,6 +114,8 @@ extension BrowseScreenViewController {
     
     @objc func emptySearchResult() {
         HUD.hide()
+        tableView.reloadData()
         showErrorAlertWithOk(title: "No Result", message: "No results for your request, try something else!")
+        
     }
 }
