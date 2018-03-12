@@ -29,11 +29,16 @@ class MealDetailsViewController: UIViewController {
         title = meal.title
         ibTitleText.text = meal.title
         ibReceiptText.text = meal.ingredients
-        if let url = meal.thumbnailUrl {
-            ibImageView.af_setImage(withURL: url, placeholderImage: #imageLiteral(resourceName: "placeholder"))
+        
+        if isFromFavoritesScreen {
+            ibImageView.image = meal.image ?? #imageLiteral(resourceName: "placeholder")
         } else {
-            ibImageView.image = #imageLiteral(resourceName: "placeholder")
-        }
+            if let url = meal.thumbnailUrl {
+                ibImageView.af_setImage(withURL: url, placeholderImage: #imageLiteral(resourceName: "placeholder"))
+            } else {
+                ibImageView.image = #imageLiteral(resourceName: "placeholder")
+            } }
+        
         addToFavoritesButton.isEnabled = !isFromFavoritesScreen
         ibReceiptText.isEditable = false
         navigationController?.setNavigationBarHidden(false, animated: true)

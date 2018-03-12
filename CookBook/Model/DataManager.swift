@@ -72,15 +72,37 @@ final class DataManager {
         }
     }
     
+    func loadFavorites() {
+        if !CoreDataManager.instance.isFavoritesEmpty {
+            CoreDataManager.instance.fetchFavorites {[unowned self] fetchedFavorites in
+                self.favoriteMeals = fetchedFavorites
+                self.postMainQueueNotification(withName: .FavoriteMealsFetched)
+            }
+        }
+    }
+    
     func addToFavorites(meal: Meal) {
         guard !favoriteMeals.contains(meal) else { return }
-        favoriteMeals.append(meal)
+        var newFavoriteMeal = Meal(title: meal.title, ingredients: meal.ingredients, thumbnailUrl: meal.thumbnailUrl, receiptURL: meal.receiptURL)
+        if let imageUrl = newFavoriteMeal.thumbnailUrl {
+            newFavoriteMeal.saveMealImage(by: imageUrl)
+        }
+        favoriteMeals.append(newFavoriteMeal)
+        CoreDataManager.instance.saveFavorites(self.favoriteMeals)
         NotificationCenter.default.post(name: .MealAddedToFavorites, object: nil)
     }
     
     func deleteMealFromFavorites(_ meal: Meal) {
         guard let deletingIndex = favoriteMeals.index(of: meal) else { debugPrint("Can't delete nonexisting meal"); return }
+        CoreDataManager.instance.saveFavorites(favoriteMeals)
         favoriteMeals.remove(at: deletingIndex)
+        CoreDataManager.instance.saveFavorites(self.favoriteMeals)
+    }
+    
+    private func postMainQueueNotification(withName name: Notification.Name) {
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: name, object: nil)
+        }
     }
     
 }

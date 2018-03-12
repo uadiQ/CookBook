@@ -34,5 +34,11 @@ class MealViewCell: UITableViewCell {
         ibTitleLabel.text = title
         ibIngredientsLabel.text = ingredients
     }
+    
+    func updateWithFavMeal(title: String, ingredients: String, image: UIImage?) {
+        ibImageView.image = image ?? #imageLiteral(resourceName: "placeholder")
+        ibTitleLabel.text = title
+        ibIngredientsLabel.text = ingredients
+    }
 
 }

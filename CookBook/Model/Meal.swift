@@ -17,7 +17,14 @@ struct Meal: Equatable {
     let thumbnailUrl: URL?
     let receiptURL: URL?
     
-    // var image: UIImage?
+    var image: UIImage?
+    
+    init(title: String, ingredients: String, thumbnailUrl: URL?, receiptURL: URL?) {
+        self.title = title
+        self.ingredients = ingredients
+        self.thumbnailUrl = thumbnailUrl
+        self.receiptURL = receiptURL
+    }
     
     init?(json: JSON) {
         guard let title = json["title"].string else { print("error @ getting title"); return nil }
@@ -32,6 +39,18 @@ struct Meal: Equatable {
 //        }
         
     }
+    
+    mutating func addImage(from data: NSData?) {
+        guard let imageData = data else { return }
+        let imageToSet = UIImage(data: imageData as Data)
+        self.image = imageToSet
+    }
+    
+    mutating func saveMealImage(by url: URL) {
+        guard let dataImage = try? Data(contentsOf: url) else { return }
+        self.image = UIImage(data: dataImage)
+    }
+    
 }
 
 extension Meal {

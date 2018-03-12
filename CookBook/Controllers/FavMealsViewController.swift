@@ -18,6 +18,8 @@ class FavMealsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        DataManager.instance.loadFavorites()
+        //CoreDataManager.instance.deleteAllData()
         addObservers()
         tableView.register(MealViewCell.nib, forCellReuseIdentifier: MealViewCell.reuseID)
         tableView.delegate = self
@@ -41,6 +43,7 @@ class FavMealsViewController: UIViewController {
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(favMemesArrayChanged), name: .MealAddedToFavorites, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(favMemesArrayChanged), name: .FavoriteMealsFetched, object: nil)
     }
     
     private func hideKeyboard() {
@@ -87,7 +90,8 @@ extension FavMealsViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         guard let mealToPresent = getMeal(at: indexPath) else { fatalError("Meal @ wrong indexPath") }
-        cell.update(title: mealToPresent.title, ingredients: mealToPresent.ingredients, imageURL: mealToPresent.thumbnailUrl)
+        //cell.update(title: mealToPresent.title, ingredients: mealToPresent.ingredients, imageURL: mealToPresent.thumbnailUrl)
+        cell.updateWithFavMeal(title: mealToPresent.title, ingredients: mealToPresent.ingredients, image: mealToPresent.image)
         return cell
     }
     

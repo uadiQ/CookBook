@@ -12,13 +12,16 @@
 		1C1D11DC20308D670092F0D3 /* MealViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1D11DA20308D670092F0D3 /* MealViewCell.swift */; };
 		1C1D11DD20308D670092F0D3 /* MealViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C1D11DB20308D670092F0D3 /* MealViewCell.xib */; };
 		1C925B232040178A0054B21E /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C925B222040178A0054B21E /* Endpoint.swift */; };
+		1C925B292042EC720054B21E /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C925B282042EC720054B21E /* CoreDataManager.swift */; };
+		1C925B4D20432F7D0054B21E /* CookBook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1C925B4B20432F7D0054B21E /* CookBook.xcdatamodeld */; };
+		1C925B5020433C600054B21E /* MealMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C925B4E20433C600054B21E /* MealMO+CoreDataClass.swift */; };
+		1C925B5120433C600054B21E /* MealMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C925B4F20433C600054B21E /* MealMO+CoreDataProperties.swift */; };
 		1C9C3FE3201FA53F00B48451 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9C3FE2201FA53F00B48451 /* AppDelegate.swift */; };
 		1C9C3FE8201FA53F00B48451 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C9C3FE6201FA53F00B48451 /* Main.storyboard */; };
 		1C9C3FEA201FA53F00B48451 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C9C3FE9201FA53F00B48451 /* Assets.xcassets */; };
 		1C9C3FED201FA53F00B48451 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C9C3FEB201FA53F00B48451 /* LaunchScreen.storyboard */; };
 		1C9C3FF92021069400B48451 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9C3FF82021069400B48451 /* DataManager.swift */; };
 		1C9C3FFB2021070100B48451 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9C3FFA2021070100B48451 /* Meal.swift */; };
-		1C9C3FFF202107AB00B48451 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9C3FFE202107AB00B48451 /* Utils.swift */; };
 		1C9C400420210F2E00B48451 /* Notification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9C400320210F2E00B48451 /* Notification+Extension.swift */; };
 		1C9C400A2023BAC100B48451 /* MealDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9C40092023BAC100B48451 /* MealDetailsViewController.swift */; };
 		783FE08C7CE6546F2A2CA184 /* Pods_CookBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88E35A9A2967EE3FDC50EB89 /* Pods_CookBook.framework */; };
@@ -30,6 +33,10 @@
 		1C1D11DA20308D670092F0D3 /* MealViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealViewCell.swift; sourceTree = "<group>"; };
 		1C1D11DB20308D670092F0D3 /* MealViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MealViewCell.xib; sourceTree = "<group>"; };
 		1C925B222040178A0054B21E /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		1C925B282042EC720054B21E /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		1C925B4C20432F7D0054B21E /* CookBook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CookBook.xcdatamodel; sourceTree = "<group>"; };
+		1C925B4E20433C600054B21E /* MealMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MealMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1C925B4F20433C600054B21E /* MealMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MealMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1C9C3FDF201FA53F00B48451 /* CookBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CookBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C9C3FE2201FA53F00B48451 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1C9C3FE7201FA53F00B48451 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -38,7 +45,6 @@
 		1C9C3FEE201FA53F00B48451 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1C9C3FF82021069400B48451 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		1C9C3FFA2021070100B48451 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
-		1C9C3FFE202107AB00B48451 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		1C9C400320210F2E00B48451 /* Notification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extension.swift"; sourceTree = "<group>"; };
 		1C9C40092023BAC100B48451 /* MealDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailsViewController.swift; sourceTree = "<group>"; };
 		88E35A9A2967EE3FDC50EB89 /* Pods_CookBook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CookBook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +71,17 @@
 				1C1D11DB20308D670092F0D3 /* MealViewCell.xib */,
 			);
 			path = MealViewCell;
+			sourceTree = "<group>";
+		};
+		1C925B242042EC200054B21E /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				1C925B282042EC720054B21E /* CoreDataManager.swift */,
+				1C925B4E20433C600054B21E /* MealMO+CoreDataClass.swift */,
+				1C925B4F20433C600054B21E /* MealMO+CoreDataProperties.swift */,
+				1C925B4B20432F7D0054B21E /* CookBook.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		1C9C3FD6201FA53F00B48451 = {
@@ -125,6 +142,7 @@
 			children = (
 				1C9C3FF82021069400B48451 /* DataManager.swift */,
 				1C9C3FFA2021070100B48451 /* Meal.swift */,
+				1C925B242042EC200054B21E /* CoreData */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -132,7 +150,6 @@
 		1C9C3FFD2021079D00B48451 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				1C9C3FFE202107AB00B48451 /* Utils.swift */,
 				1C925B222040178A0054B21E /* Endpoint.swift */,
 			);
 			path = Utils;
@@ -313,16 +330,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C925B5020433C600054B21E /* MealMO+CoreDataClass.swift in Sources */,
+				1C925B5120433C600054B21E /* MealMO+CoreDataProperties.swift in Sources */,
 				1C9C3FE3201FA53F00B48451 /* AppDelegate.swift in Sources */,
 				1C1D11D820305A960092F0D3 /* BrowseScreenViewController.swift in Sources */,
 				1C1D11D6203058D10092F0D3 /* FavMealsViewController.swift in Sources */,
 				1C9C400420210F2E00B48451 /* Notification+Extension.swift in Sources */,
 				1C925B232040178A0054B21E /* Endpoint.swift in Sources */,
+				1C925B4D20432F7D0054B21E /* CookBook.xcdatamodeld in Sources */,
 				1C9C3FFB2021070100B48451 /* Meal.swift in Sources */,
 				1C9C3FF92021069400B48451 /* DataManager.swift in Sources */,
 				1C9C400A2023BAC100B48451 /* MealDetailsViewController.swift in Sources */,
-				1C9C3FFF202107AB00B48451 /* Utils.swift in Sources */,
 				1C1D11DC20308D670092F0D3 /* MealViewCell.swift in Sources */,
+				1C925B292042EC720054B21E /* CoreDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +481,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4VG8M9JHQ6;
 				INFOPLIST_FILE = CookBook/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Vadim-Shoshin.CookBook";
@@ -476,6 +497,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4VG8M9JHQ6;
 				INFOPLIST_FILE = CookBook/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Vadim-Shoshin.CookBook";
@@ -507,6 +529,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1C925B4B20432F7D0054B21E /* CookBook.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1C925B4C20432F7D0054B21E /* CookBook.xcdatamodel */,
+			);
+			currentVersion = 1C925B4C20432F7D0054B21E /* CookBook.xcdatamodel */;
+			path = CookBook.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1C9C3FD7201FA53F00B48451 /* Project object */;
 }

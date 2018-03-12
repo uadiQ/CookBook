@@ -13,4 +13,5 @@ extension Notification.Name {
     static let EmptySearchResult = Notification.Name("EmptySearchResult")
     static let MealDeletedFromFavorites = Notification.Name("MealDeletedFromFavorites")
     static let MealAddedToFavorites = Notification.Name("MealAddedToFavorites")
+    static let FavoriteMealsFetched = Notification.Name("FavoriteMealsFetched")
 }
