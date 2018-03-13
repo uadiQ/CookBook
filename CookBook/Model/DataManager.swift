@@ -88,15 +88,16 @@ final class DataManager {
             newFavoriteMeal.saveMealImage(by: imageUrl)
         }
         favoriteMeals.append(newFavoriteMeal)
-        CoreDataManager.instance.saveFavorites(self.favoriteMeals)
+        //CoreDataManager.instance.refreshFavorites(self.favoriteMeals)
+        CoreDataManager.instance.addMealToFavorites(newFavoriteMeal)
         NotificationCenter.default.post(name: .MealAddedToFavorites, object: nil)
     }
     
     func deleteMealFromFavorites(_ meal: Meal) {
         guard let deletingIndex = favoriteMeals.index(of: meal) else { debugPrint("Can't delete nonexisting meal"); return }
-        CoreDataManager.instance.saveFavorites(favoriteMeals)
         favoriteMeals.remove(at: deletingIndex)
-        CoreDataManager.instance.saveFavorites(self.favoriteMeals)
+        //CoreDataManager.instance.refreshFavorites(self.favoriteMeals)
+        CoreDataManager.instance.deleteMealFromFavorites(meal)
     }
     
     private func postMainQueueNotification(withName name: Notification.Name) {

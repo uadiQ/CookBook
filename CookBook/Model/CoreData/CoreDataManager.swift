@@ -6,7 +6,7 @@
 //  Copyright © 2018 Vadim Shoshin. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreData
 
 final class CoreDataManager {
@@ -30,7 +30,15 @@ final class CoreDataManager {
         }
     }
     
-    func saveFavorites(_ favorites: [Meal]) {
+    func addMealToFavorites(_ meal: Meal) {
+        persistentContainer.performBackgroundTask { bgContext in
+            let mealMO = MealMO(context: bgContext)
+            mealMO.setup(from: meal)
+            try? bgContext.save()
+        }
+    }
+    
+    func refreshFavorites(_ favorites: [Meal]) {
         deleteAllData()
         persistentContainer.performBackgroundTask { bgContext in
             favorites.forEach {
@@ -48,6 +56,16 @@ final class CoreDataManager {
             try? bgContext.save()
         }
     }
+    
+    func deleteMealFromFavorites(_ meal: Meal) {
+        persistentContainer.performBackgroundTask { bgContext in
+            let mealMO = MealMO(context: bgContext)
+            mealMO.setup(from: meal)
+            bgContext.delete(mealMO)
+            try? bgContext.save()
+        }
+    }
+    
     
     // MARK: - Core Data stack
     private lazy var persistentContainer: NSPersistentContainer = {
@@ -79,7 +97,7 @@ final class CoreDataManager {
     
     // MARK: - Core Data Saving support
     
-    private func saveContext () {
+        private func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {
