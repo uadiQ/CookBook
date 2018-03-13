@@ -59,13 +59,17 @@ final class CoreDataManager {
     
     func deleteMealFromFavorites(_ meal: Meal) {
         persistentContainer.performBackgroundTask { bgContext in
-            let mealMO = MealMO(context: bgContext)
-            mealMO.setup(from: meal)
-            bgContext.delete(mealMO)
+            let request: NSFetchRequest<MealMO> = MealMO.fetchRequest()
+            let titlePredicate = NSPredicate(format: "title = '\(meal.title)'")
+            request.predicate = titlePredicate
+            if let result = try? bgContext.fetch(request) {
+                for object in result {
+                    bgContext.delete(object)
+                }
+            }
             try? bgContext.save()
         }
     }
-    
     
     // MARK: - Core Data stack
     private lazy var persistentContainer: NSPersistentContainer = {
