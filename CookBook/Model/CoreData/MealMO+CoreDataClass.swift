@@ -17,6 +17,7 @@ public class MealMO: NSManagedObject {
                     thumbnailUrl: URL(string: self.thumbnailUrl ?? ""),
                     receiptURL: URL(string: self.receiptURL ?? ""))
         plainMealObject.addImage(from: self.image)
+        plainMealObject.id = Int(self.id)
         return plainMealObject
     }
     
@@ -25,6 +26,7 @@ public class MealMO: NSManagedObject {
         self.ingredients = meal.ingredients
         self.thumbnailUrl = String(describing: meal.thumbnailUrl)
         self.receiptURL = String(describing: meal.receiptURL)
+        self.id = Int32(meal.id ?? 0)
         if let image = meal.image {
             guard let imageData = UIImagePNGRepresentation(image) else { return }
             self.image = NSData(data: imageData)

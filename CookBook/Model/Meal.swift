@@ -11,6 +11,8 @@ import SwiftyJSON
 import AlamofireImage
 
 struct Meal: Equatable {
+    static var favoriteMealsCount: Int = 0
+    static let idCounterKey = "idCounter"
 
     let title: String
     let ingredients: String
@@ -18,6 +20,7 @@ struct Meal: Equatable {
     let receiptURL: URL?
     
     var image: UIImage?
+    var id: Int?
     
     init(title: String, ingredients: String, thumbnailUrl: URL?, receiptURL: URL?) {
         self.title = title

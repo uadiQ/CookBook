@@ -58,10 +58,13 @@ final class CoreDataManager {
     }
     
     func deleteMealFromFavorites(_ meal: Meal) {
+        guard let deletionId = meal.id else { return }
         persistentContainer.performBackgroundTask { bgContext in
             let request: NSFetchRequest<MealMO> = MealMO.fetchRequest()
-            let titlePredicate = NSPredicate(format: "title = '\(meal.title)'")
-            request.predicate = titlePredicate
+//            let secondPredicate = NSPredicate(format: "title LIKE %@", meal.title)
+       //  let titlePredicate = NSPredicate(format: "title contains[cd] '\(meal.title)'")
+            let idPredicate = NSPredicate(format: "id = %d", deletionId)
+            request.predicate = idPredicate
             if let result = try? bgContext.fetch(request) {
                 for object in result {
                     bgContext.delete(object)

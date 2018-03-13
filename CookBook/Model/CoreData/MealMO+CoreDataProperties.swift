@@ -21,5 +21,6 @@ extension MealMO {
     @NSManaged public var thumbnailUrl: String?
     @NSManaged public var image: NSData?
     @NSManaged public var receiptURL: String?
-
+    @NSManaged public var id: Int32
+    
 }

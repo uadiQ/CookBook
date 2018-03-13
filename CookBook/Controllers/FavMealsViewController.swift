@@ -26,6 +26,7 @@ class FavMealsViewController: UIViewController {
         tableView.dataSource = self
         searchBar.delegate = self
         tableView.keyboardDismissMode = .onDrag
+        Meal.favoriteMealsCount = UserDefaults.standard.integer(forKey: Meal.idCounterKey)
     }
     
     override func viewWillAppear(_ animated: Bool) {

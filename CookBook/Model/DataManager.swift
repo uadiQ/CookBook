@@ -83,11 +83,19 @@ final class DataManager {
     
     func addToFavorites(meal: Meal) {
         guard !favoriteMeals.contains(meal) else { return }
-        var newFavoriteMeal = Meal(title: meal.title, ingredients: meal.ingredients, thumbnailUrl: meal.thumbnailUrl, receiptURL: meal.receiptURL)
+        var newFavoriteMeal = Meal(title: meal.title, ingredients: meal.ingredients,
+                                   thumbnailUrl: meal.thumbnailUrl, receiptURL: meal.receiptURL)
+        
         if let imageUrl = newFavoriteMeal.thumbnailUrl {
             newFavoriteMeal.saveMealImage(by: imageUrl)
         }
+        
+        newFavoriteMeal.id = Meal.favoriteMealsCount
+        Meal.favoriteMealsCount += 1
+        UserDefaults.standard.set(Meal.favoriteMealsCount, forKey: Meal.idCounterKey)
+        
         favoriteMeals.append(newFavoriteMeal)
+
         CoreDataManager.instance.addMealToFavorites(newFavoriteMeal)
         NotificationCenter.default.post(name: .MealAddedToFavorites, object: nil)
     }
