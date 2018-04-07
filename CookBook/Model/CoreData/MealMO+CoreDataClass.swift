@@ -12,10 +12,11 @@ import CoreData
 
 public class MealMO: NSManagedObject {
     func convertedPlainObject() -> Meal {
+        guard let stringedReceipt = self.receiptURL else { fatalError("cannot obtain url from MO")}
         var plainMealObject = Meal(title: self.title ?? "",
                     ingredients: self.ingredients ?? "",
                     thumbnailUrl: URL(string: self.thumbnailUrl ?? ""),
-                    receiptURL: URL(string: self.receiptURL ?? ""))
+                    receiptURL: URL(string: stringedReceipt))
         plainMealObject.addImage(from: self.image)
         plainMealObject.id = Int(self.id)
         return plainMealObject
@@ -25,7 +26,8 @@ public class MealMO: NSManagedObject {
         self.title = meal.title
         self.ingredients = meal.ingredients
         self.thumbnailUrl = String(describing: meal.thumbnailUrl)
-        self.receiptURL = String(describing: meal.receiptURL)
+        guard let receiptUrl = meal.receiptURL else { print("Failed at getting receiptUrl"); return }
+        self.receiptURL = String(describing: receiptUrl)
         self.id = Int32(meal.id ?? 0)
         if let image = meal.image {
             guard let imageData = UIImagePNGRepresentation(image) else { return }

@@ -1,10 +1,10 @@
 PODS:
-  - Alamofire (4.5.1)
-  - AlamofireImage (3.3.0):
+  - Alamofire (4.7.1)
+  - AlamofireImage (3.3.1):
     - Alamofire (~> 4.5)
   - PKHUD (5.0.0)
-  - SwiftLint (0.23.1)
-  - SwiftyJSON (3.1.4)
+  - SwiftLint (0.25.0)
+  - SwiftyJSON (4.0.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -14,11 +14,11 @@ DEPENDENCIES:
   - SwiftyJSON
 
 SPEC CHECKSUMS:
-  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
-  AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
+  Alamofire: 68d7d521118d49c615a8d2214d87cdf525599d30
+  AlamofireImage: 3b35b586853abaf94ca1250f4e94cff3c21a4c0d
   PKHUD: 3c001512c6e002091184197a8de7a20420786e3b
-  SwiftLint: 1b670ce79284c76520f84060e87d645078fd32fa
-  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  SwiftLint: e14651157288e9e01d6e1a71db7014fb5744a8ea
+  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
 PODFILE CHECKSUM: 94a037d6b9805e148065b1d1ffc6312ab6da6a43
 
