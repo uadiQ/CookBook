@@ -13,36 +13,66 @@ import PKHUD
 
 final class DataManager {
     static let instance = DataManager()
-    private init() { }
+    let networkManager: NetworkManager
+    private init() {
+        self.networkManager = NetworkManager()
+    }
     
     private(set) var meals: [Meal] = []
     private(set) var favoriteMeals: [Meal] = []
     
     func loadDefaultReceiptFromNet() {
-        Alamofire.request(Endpoint.basicUrl + "pasta").responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                let jsonResponse = JSON(value)
-                guard let mealsJSONArray = jsonResponse["results"].array else {
-                    print("Response didn't turn into array")
+        networkManager.searchRequest(for: "pasta") { response in
+            switch response {
+            case .success(let responseValue):
+                guard let jsonArray = responseValue as? [JSON] else {
+                    print("Wrong format of response")
                     return
                 }
-                
-                if mealsJSONArray.isEmpty {
+                if jsonArray.isEmpty {
                     NotificationCenter.default.post(name: .EmptySearchResult, object: nil)
                     return
                 }
-                for item in mealsJSONArray {
-                    guard let meal = Meal(json: item) else { debugPrint("Error @ creating meal from json"); continue }
+                for item in jsonArray {
+                    guard let meal = Meal(json: item) else {
+                        debugPrint("Error @ creating meal from json")
+                        continue
+                    }
                     self.meals.append(meal)
                 }
                 NotificationCenter.default.post(name: .MealsLoaded, object: nil)
                 
-            case .failure(let error):
+            case .fail(let error):
                 debugPrint(error)
             }
         }
     }
+    
+    //    func loadDefaultReceiptFromNet() {
+    //        Alamofire.request(Endpoint.basicUrl + "pasta").responseJSON { response in
+    //            switch response.result {
+    //            case .success(let value):
+    //                let jsonResponse = JSON(value)
+    //                guard let mealsJSONArray = jsonResponse["results"].array else {
+    //                    print("Response didn't turn into array")
+    //                    return
+    //                }
+    //
+    //                if mealsJSONArray.isEmpty {
+    //                    NotificationCenter.default.post(name: .EmptySearchResult, object: nil)
+    //                    return
+    //                }
+    //                for item in mealsJSONArray {
+    //                    guard let meal = Meal(json: item) else { debugPrint("Error @ creating meal from json"); continue }
+    //                    self.meals.append(meal)
+    //                }
+    //                NotificationCenter.default.post(name: .MealsLoaded, object: nil)
+    //
+    //            case .failure(let error):
+    //                debugPrint(error)
+    //            }
+    //        }
+    //    }
     
     func searchReceipts(for meal: String) {
         Alamofire.request(Endpoint.basicUrl + meal).responseJSON { response in
@@ -95,7 +125,7 @@ final class DataManager {
         UserDefaults.standard.set(Meal.favoriteMealsCount, forKey: Meal.idCounterKey)
         
         favoriteMeals.append(newFavoriteMeal)
-
+        
         CoreDataManager.instance.addMealToFavorites(newFavoriteMeal)
         NotificationCenter.default.post(name: .MealAddedToFavorites, object: nil)
     }

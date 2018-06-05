@@ -11,6 +11,9 @@
 		1C1D11D820305A960092F0D3 /* BrowseScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1D11D720305A960092F0D3 /* BrowseScreenViewController.swift */; };
 		1C1D11DC20308D670092F0D3 /* MealViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1D11DA20308D670092F0D3 /* MealViewCell.swift */; };
 		1C1D11DD20308D670092F0D3 /* MealViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C1D11DB20308D670092F0D3 /* MealViewCell.xib */; };
+		1C28989F20C6CBB40033EF41 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28989E20C6CBB40033EF41 /* String+Extension.swift */; };
+		1C3750C220C58E3400E9C0EF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3750C120C58E3400E9C0EF /* NetworkManager.swift */; };
+		1C3750C420C5927D00E9C0EF /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3750C320C5927D00E9C0EF /* Result.swift */; };
 		1C925B232040178A0054B21E /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C925B222040178A0054B21E /* Endpoint.swift */; };
 		1C925B292042EC720054B21E /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C925B282042EC720054B21E /* CoreDataManager.swift */; };
 		1C925B4D20432F7D0054B21E /* CookBook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1C925B4B20432F7D0054B21E /* CookBook.xcdatamodeld */; };
@@ -32,6 +35,9 @@
 		1C1D11D720305A960092F0D3 /* BrowseScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseScreenViewController.swift; sourceTree = "<group>"; };
 		1C1D11DA20308D670092F0D3 /* MealViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealViewCell.swift; sourceTree = "<group>"; };
 		1C1D11DB20308D670092F0D3 /* MealViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MealViewCell.xib; sourceTree = "<group>"; };
+		1C28989E20C6CBB40033EF41 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		1C3750C120C58E3400E9C0EF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		1C3750C320C5927D00E9C0EF /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		1C925B222040178A0054B21E /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		1C925B282042EC720054B21E /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		1C925B4C20432F7D0054B21E /* CookBook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CookBook.xcdatamodel; sourceTree = "<group>"; };
@@ -74,6 +80,14 @@
 			path = MealViewCell;
 			sourceTree = "<group>";
 		};
+		1C3750C020C58E1000E9C0EF /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				1C3750C120C58E3400E9C0EF /* NetworkManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		1C925B242042EC200054B21E /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,6 +120,7 @@
 		1C9C3FE1201FA53F00B48451 /* CookBook */ = {
 			isa = PBXGroup;
 			children = (
+				1C3750C020C58E1000E9C0EF /* Services */,
 				1C9C400220210F1E00B48451 /* Extensions */,
 				1C9C3FFD2021079D00B48451 /* Utils */,
 				1C9C3FF7202105F700B48451 /* Model */,
@@ -143,6 +158,7 @@
 			children = (
 				1C9C3FF82021069400B48451 /* DataManager.swift */,
 				1C9C3FFA2021070100B48451 /* Meal.swift */,
+				1C3750C320C5927D00E9C0EF /* Result.swift */,
 				1C925B242042EC200054B21E /* CoreData */,
 			);
 			path = Model;
@@ -160,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				1C9C400320210F2E00B48451 /* Notification+Extension.swift */,
+				1C28989E20C6CBB40033EF41 /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -193,7 +210,6 @@
 				1C9C3FDC201FA53F00B48451 /* Frameworks */,
 				1C9C3FDD201FA53F00B48451 /* Resources */,
 				7C7B0C379353CC0827744351 /* [CP] Embed Pods Frameworks */,
-				47F5069480797594BEC769C1 /* [CP] Copy Pods Resources */,
 				1C9C3FF4201FA64800B48451 /* ShellScript */,
 			);
 			buildRules = (
@@ -212,7 +228,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Vadim Shoshin";
 				TargetAttributes = {
 					1C9C3FDE201FA53F00B48451 = {
@@ -267,21 +283,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
 		};
-		47F5069480797594BEC769C1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CookBook/Pods-CookBook-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		7C7B0C379353CC0827744351 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -331,16 +332,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C28989F20C6CBB40033EF41 /* String+Extension.swift in Sources */,
 				1C925B5020433C600054B21E /* MealMO+CoreDataClass.swift in Sources */,
 				1C925B5120433C600054B21E /* MealMO+CoreDataProperties.swift in Sources */,
 				1C9C3FE3201FA53F00B48451 /* AppDelegate.swift in Sources */,
 				1C1D11D820305A960092F0D3 /* BrowseScreenViewController.swift in Sources */,
 				1C1D11D6203058D10092F0D3 /* FavMealsViewController.swift in Sources */,
 				1C9C400420210F2E00B48451 /* Notification+Extension.swift in Sources */,
+				1C3750C420C5927D00E9C0EF /* Result.swift in Sources */,
 				1C925B232040178A0054B21E /* Endpoint.swift in Sources */,
 				1C925B4D20432F7D0054B21E /* CookBook.xcdatamodeld in Sources */,
 				1C9C3FFB2021070100B48451 /* Meal.swift in Sources */,
 				1C9C3FF92021069400B48451 /* DataManager.swift in Sources */,
+				1C3750C220C58E3400E9C0EF /* NetworkManager.swift in Sources */,
 				1C9C400A2023BAC100B48451 /* MealDetailsViewController.swift in Sources */,
 				1C1D11DC20308D670092F0D3 /* MealViewCell.swift in Sources */,
 				1C925B292042EC720054B21E /* CoreDataManager.swift in Sources */,
@@ -383,6 +387,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -390,6 +395,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -440,6 +446,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -447,6 +454,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -484,7 +492,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4VG8M9JHQ6;
 				INFOPLIST_FILE = CookBook/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Vadim-Shoshin.CookBook";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -501,7 +509,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4VG8M9JHQ6;
 				INFOPLIST_FILE = CookBook/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Vadim-Shoshin.CookBook";
 				PRODUCT_NAME = "$(TARGET_NAME)";

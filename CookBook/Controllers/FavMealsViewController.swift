@@ -78,7 +78,13 @@ class FavMealsViewController: UIViewController {
 extension FavMealsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return MealViewCell.height
+       // return MealViewCell.height
+        //return UITableViewAutomaticDimension
+        guard let mealToPresent = getMeal(at: indexPath) else {
+            fatalError("Meal @ wrong indexPath")
+        }
+        let width = tableView.frame.width
+        return MealViewCell.height(for: mealToPresent, tableViewWidth: width)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

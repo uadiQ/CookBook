@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Endpoint {
+enum Endpoint {
     static let defaultUrl: String = "http://www.recipepuppy.com/api/?i=onions,garlic&q=omelet&p=3"
     static let basicUrl: String = "http://www.recipepuppy.com/api/?q="
 }

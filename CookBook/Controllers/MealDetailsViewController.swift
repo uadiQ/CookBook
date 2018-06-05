@@ -16,9 +16,13 @@ class MealDetailsViewController: UIViewController {
     @IBOutlet private weak var ibImageView: UIImageView!
     @IBOutlet private weak var ibTitleText: UILabel!
     @IBOutlet private weak var ibReceiptText: UITextView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var customNavBarTitleView: UIView!
     
     var isFromFavoritesScreen = false
     var meal: Meal!
+    
+    private let titleViewColor = UIColor(red: 249.0 / 255, green: 249.0 / 255, blue: 249.0 / 255, alpha: 1.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +30,10 @@ class MealDetailsViewController: UIViewController {
     }
     
     private func setupUI() {
-        title = meal.title
+    
+       // title = meal.title
+        titleLabel.text = meal.title
+        customNavBarTitleView.backgroundColor = titleViewColor
         ibTitleText.text = meal.title
         ibReceiptText.text = meal.ingredients
         
@@ -49,8 +56,8 @@ class MealDetailsViewController: UIViewController {
         
         //UIApplication.shared.open(urlToLoad, options: [:], completionHandler: nil)
         
-        let vc = SFSafariViewController(url: urlToLoad)
-        present(vc, animated: true, completion: nil)
+        let safariViewController = SFSafariViewController(url: urlToLoad)
+        present(safariViewController, animated: true, completion: nil)
     }
     
     @IBAction func addToFavoritesPushed(_ sender: Any) {
